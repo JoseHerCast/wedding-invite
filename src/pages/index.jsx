@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getCookie } from "@/utils/cookieHandler"; // Para recuperar el teléfono guardado
 import GuestVerificationForm from "@/components/GuestVerificationForm";
 import RSVPConfirmation from "@/components/RSVPConfirmation";
@@ -10,13 +10,55 @@ export default function Home() {
     const [guestData, setGuestData] = useState([]);
     const [formData, setFormData] = useState({}); // Estado para guardar selecciones
 
+    useEffect(() => {
+        if (guestData.length === 0) return; // Evita ejecutar el efecto si guestData aún está vacío
+
+        const titular = guestData.find(guest => guest["Titular"] === "TRUE");
+        if (!titular || !titular["Boletos"]) return; // Si no hay titular o no tiene "Boletos", se detiene la ejecución
+
+        const boletos = parseInt(titular["Boletos"], 10) || 0;
+        const numRegistros = guestData.length;
+        const acompañantesFaltantes = boletos - numRegistros;
+
+        // Generar los registros con la bandera `EsAcompanante`
+        const registrosCompletos = guestData.map((guest) => ({
+            ...guest,
+            EsAcompanante: false, // Invitados principales
+        }));
+
+        for (let i = 1; i <= acompañantesFaltantes; i++) {
+            registrosCompletos.push({
+                Nombre: `Acompañante ${i}`,
+                Asistencia: "Pendiente",
+                Edad: "Adulto",
+                EsAcompanante: true, // Acompañantes generados dinámicamente
+                NoUsaraBoleto: "No",
+            });
+        }
+
+        // Iniciar `formData` con los valores correctos
+        const initialFormData = {};
+        registrosCompletos.forEach((guest, index) => {
+            initialFormData[index] = { ...guest }; // Guarda cada invitado con `EsAcompanante`
+        });
+
+        setFormData(initialFormData);
+    }, [guestData]);
+
+
+
     // Manejar cambios en el formulario
     const handleInputChange = (index, field, value) => {
         setFormData(prev => ({
             ...prev,
-            [index]: { ...prev[index], [field]: value }
+            [index]: {
+                ...prev[index],
+                [field]: value,
+                EsAcompanante: prev[index]?.EsAcompanante || false // Mantener el valor original
+            }
         }));
     };
+
 
 
     return (
@@ -66,13 +108,20 @@ export default function Home() {
                             const numRegistros = guestData.length;
                             const acompañantesFaltantes = boletos - numRegistros;
 
-                            // Agregar acompañantes ficticios si faltan registros
-                            const registrosCompletos = [...guestData];
+                            // Agregar invitados principales con EsAcompanante: false
+                            const registrosCompletos = guestData.map((guest, index) => ({
+                                ...guest,
+                                EsAcompanante: false // Invitados principales
+                            }));
+
+                            // Agregar acompañantes ficticios con EsAcompanante: true
                             for (let i = 1; i <= acompañantesFaltantes; i++) {
                                 registrosCompletos.push({
                                     Nombre: `Acompañante ${i}`,
                                     Asistencia: "Pendiente",
                                     Edad: "Adulto",
+                                    EsAcompanante: true, // Acompañantes generados dinámicamente
+                                    NoUsaraBoleto: "No", // Por defecto, el boleto sí se usa
                                 });
                             }
 
@@ -150,6 +199,9 @@ export default function Home() {
                                                         </label>
                                                     )}
                                                 </div>
+
+                                                {/* Campo oculto en el formulario con la bandera EsAcompanante */}
+                                                <input type="hidden" name={`EsAcompanante-${index}`} value={row.EsAcompanante} />
                                             </div>
                                         );
                                     })}
@@ -164,7 +216,9 @@ export default function Home() {
                 ) : (
                     <RSVPConfirmation
                         phoneNumber={phoneNumber}
-                        guestData={Object.values(formData).map((guest, index) => ({
+                        guestData={Object.values(formData)
+                            .filter(guest => !(guest.EsAcompanante && guest.NoUsaraBoleto==="Sí"))
+                            .map((guest, index) => ({
                             ...guest,
                             Nombre: guest.Nombre || guestData[index]?.Nombre || "N/A", // Asegura que los invitados principales mantengan su nombre
                             Telefono: getCookie("guestPhone") || phoneNumber, // Recupera el teléfono desde la cookie

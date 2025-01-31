@@ -25,7 +25,7 @@ async function saveConfirmationData(guestData) {
         await confirmadosSheet.addRow({
             Nombre: guest.Nombre || "N/A", // Asegura que el nombre siempre esté presente
             Telefono: guest.Telefono || "N/A",
-            Asistencia: guest.Asistencia || "Pendiente",
+            Asistencia: guest.EsAcompanante? "Asistirá" : guest.Asistencia,
             Edad: guest.Edad || "Adulto",
             NoUsaraBoleto: guest.NoUsaraBoleto === "Sí" ? "No usará boleto" : "Sí usará boleto"
         });
