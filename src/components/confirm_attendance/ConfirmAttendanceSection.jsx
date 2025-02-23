@@ -3,7 +3,6 @@ import GuestList from "./GuestList";
 import RSVPControls from "./RSVPControls";
 
 const ConfirmAttendanceSection = ({ confirmRef, guestData, setGuestData, formData, handleInputChange }) => {
-  console.log("Props recibidas:", { confirmRef, guestData, formData });
 
   // Verificar si ya está registrado
   const attendance=guestData.some(guest=>guest.Asistencia === "Asistirá")

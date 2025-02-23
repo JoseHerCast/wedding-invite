@@ -4,9 +4,11 @@ import { getCookie } from "@/utils/cookieHandler";
 
 const RSVPControls = ({ guestData, formData, formRef, setGuestData }) => {
     const [isLoading, setIsLoading] = useState(false); // Estado para el loader
+    const [alertMessage, setAlertMessage] = useState(null);
+    const [alertType, setAlertType] = useState("info");
 
     const confirmAttendance = async (guestData) => {
-        console.log("📤 Enviando datos de asistencia:", guestData);
+        /* console.log("📤 Enviando datos de asistencia:", guestData); */
         setIsLoading(true); // Activar loader
 
         try {
@@ -16,13 +18,14 @@ const RSVPControls = ({ guestData, formData, formRef, setGuestData }) => {
                 body: JSON.stringify({ guestData }),
             });
 
-            console.log("📥 Respuesta recibida del servidor:", res);
+            /* console.log("📥 Respuesta recibida del servidor:", res); */
 
             const result = await res.json();
-            console.log("📊 Resultado del JSON parseado:", result);
+            /* console.log("📊 Resultado del JSON parseado:", result); */
 
             if (res.ok && result.success) {
-                alert("✅ ¡Confirmación registrada exitosamente!");
+                setAlertMessage("¡Confirmación registrada exitosamente!");
+                setAlertType("success"); // Puede ser "success", "error" o "info"
 
                 // Obtener la clave del invitado para hacer un nuevo fetch
                 const guestKey = getCookie("guestKey");
@@ -33,7 +36,7 @@ const RSVPControls = ({ guestData, formData, formRef, setGuestData }) => {
                 }
 
                 // Realizar fetch para actualizar guestData con la información más reciente
-                console.log("🔄 Obteniendo información actualizada de invitados...");
+                /* console.log("🔄 Obteniendo información actualizada de invitados..."); */
                 const updatedRes = await fetch("/api/fetchGuestDetails", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -41,7 +44,7 @@ const RSVPControls = ({ guestData, formData, formRef, setGuestData }) => {
                 });
 
                 const updatedData = await updatedRes.json();
-                console.log("📊 Datos actualizados obtenidos:", updatedData);
+                /* console.log("📊 Datos actualizados obtenidos:", updatedData); */
 
                 if (updatedRes.ok && updatedData.success) {
                     setGuestData(updatedData.data); // Actualizar el estado con los datos más recientes
@@ -50,11 +53,14 @@ const RSVPControls = ({ guestData, formData, formRef, setGuestData }) => {
                 }
             } else {
                 console.warn("⚠️ Error en la confirmación:", result);
-                alert("⚠️ Error al registrar la confirmación.");
+                setAlertMessage("Error al registrar la confirmación.");
+                setAlertType("error"); // Puede ser "success", "error" o "info"
             }
         } catch (error) {
             console.error("❌ Error en la solicitud de confirmación:", error);
-            alert("Hubo un problema al confirmar la asistencia.");
+            alert("");
+            setAlertMessage("Hubo un problema al confirmar la asistencia.");
+            setAlertType("error"); // Puede ser "success", "error" o "info"
         } finally {
             setIsLoading(false); // Desactivar loader después de la respuesta
         }
@@ -80,7 +86,19 @@ const RSVPControls = ({ guestData, formData, formRef, setGuestData }) => {
         confirmAttendance(formattedGuestData);
     };
 
-    return <RSVPConfirmation onConfirm={handleConfirm} isLoading={isLoading} />;
+    return (
+        <>
+            <RSVPConfirmation onConfirm={handleConfirm} isLoading={isLoading} />
+            {/* // Llamar a MyAlert cuando haya un mensaje */}
+            {alertMessage && (
+                <MyAlert
+                    type={alertType}
+                    message={alertMessage}
+                    onClose={() => setAlertMessage(null)}
+                />
+            )}
+        </>
+    );
 };
 
 export default RSVPControls;

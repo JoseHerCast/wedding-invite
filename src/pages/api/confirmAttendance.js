@@ -22,7 +22,7 @@ async function saveConfirmationData(guestData) {
 
     // Registrar cada invitado y acompañante en una fila nueva
     for (const guest of guestData) {
-        console.log("📝 Registrando en Google Sheets:", guest);
+        /* console.log("📝 Registrando en Google Sheets:", guest); */
         await confirmadosSheet.addRow({
             Nombre: guest.Nombre || "N/A", // Asegura que el nombre siempre esté presente
             Clave: guest.Clave || "N/A",
@@ -66,7 +66,7 @@ async function checkConfirmation(guestData) {
     for (const row of matchingRows) {
         row.set("Registro", "TRUE");
         await row.save();
-        console.log(`✅ Se ha actualizado el registro de ${row.get("Nombre")}`);
+        /* console.log(`✅ Se ha actualizado el registro de ${row.get("Nombre")}`); */
     }
 }
 
@@ -78,7 +78,7 @@ export default async function handler(req, res) {
     try {
         const { guestData } = req.body;
 
-        console.log("📥 Recibiendo datos en API:", guestData);
+        /* console.log("📥 Recibiendo datos en API:", guestData); */
 
         if (!guestData || !Array.isArray(guestData)) {
             return res.status(400).json({ success: false, message: "Datos inválidos. Se esperaba un array de invitados." });

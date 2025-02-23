@@ -1,7 +1,7 @@
 import GuestRow from "./GuestRow";
 
 const GuestList = ({ guestData, formData, handleInputChange}) => {
-  console.log("Props recibidas en GuestList:", { guestData, formData });
+  /* console.log("Props recibidas en GuestList:", { guestData, formData }); */
 
   if (!guestData || guestData.length === 0) {
     console.warn("GuestList: No hay datos de invitados.");
@@ -9,7 +9,7 @@ const GuestList = ({ guestData, formData, handleInputChange}) => {
   }
 
   const titular = guestData.find(guest => guest["Titular"] === "TRUE");
-  console.log("Titular encontrado:", titular);
+  /* console.log("Titular encontrado:", titular); */
 
   if (!titular || !titular["Boletos"]) {
     console.warn("GuestList: No se encontró titular o no tiene boletos.");
@@ -20,7 +20,7 @@ const GuestList = ({ guestData, formData, handleInputChange}) => {
   const numRegistros = guestData.length;
   const acompañantesFaltantes = boletos - numRegistros;
 
-  console.log(`Boletos disponibles: ${boletos}, Registros actuales: ${numRegistros}, Acompañantes faltantes: ${acompañantesFaltantes}`);
+  /* console.log(`Boletos disponibles: ${boletos}, Registros actuales: ${numRegistros}, Acompañantes faltantes: ${acompañantesFaltantes}`); */
 
   const registrosCompletos = guestData.map((guest) => ({
     ...guest,
@@ -37,7 +37,7 @@ const GuestList = ({ guestData, formData, handleInputChange}) => {
     });
   }
 
-  console.log("Registros completos:", registrosCompletos);
+  /* console.log("Registros completos:", registrosCompletos); */
 
   return (
     <div className="w-full max-w-2xl space-y-2 md:space-y-2">

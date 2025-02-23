@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { setCookie } from "@/utils/cookieHandler";
+import MyAlert from "@/components/MyAlert";
 
 const GuestVerificationForm = ({ setGuestData }) => {
   const [guestKey, setGuestKey] = useState("");
   const [isLoading, setIsLoading] = useState(false); // Estado para el loader
+  const [alertMessage, setAlertMessage] = useState(null);
+  const [alertType, setAlertType] = useState("info");
 
 
   const handleSubmit = async (e) => {
@@ -23,7 +26,9 @@ const GuestVerificationForm = ({ setGuestData }) => {
       if (res.ok && result.success) {
         setGuestData(result.data || []);
       } else {
-        alert("Código inválido o no encontrado.");
+        setAlertMessage("Código inválido o no encontrado.");
+        setAlertType("error"); // Puede ser "success", "error" o "info"
+
         setGuestData([]);
       }
     } catch (error) {
@@ -31,7 +36,7 @@ const GuestVerificationForm = ({ setGuestData }) => {
       alert("Hubo un error. Intenta de nuevo.");
       setGuestData([]);
     }
-    finally{
+    finally {
       setIsLoading(false)
     }
   };
@@ -53,10 +58,18 @@ const GuestVerificationForm = ({ setGuestData }) => {
           className="border border-beige-500 p-2 rounded bg-transparent text-center text-beige-500 focus:outline-none focus:ring-2 focus:ring-oldGold-500 placeholder-beige-500"
           required
         />
-        <button type="submit" className={`${isLoading?'bg-gray-400':'bg-oldGold-500'}  text-white py-2 rounded-lg shadow-md hover:shadow-lg transition-all active:scale-95`} disabled={isLoading} >
-          {isLoading?"Verificando...":"Acceder"}
+        <button type="submit" className={`${isLoading ? 'bg-gray-400' : 'bg-oldGold-500'}  text-white py-2 rounded-lg shadow-md hover:shadow-lg transition-all active:scale-95`} disabled={isLoading} >
+          {isLoading ? "Verificando..." : "Acceder"}
         </button>
       </form>
+      {/* // Llamar a MyAlert cuando haya un mensaje */}
+      {alertMessage && (
+        <MyAlert
+          type={alertType}
+          message={alertMessage}
+          onClose={() => setAlertMessage(null)}
+        />
+      )}
     </div>
   );
 };

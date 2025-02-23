@@ -25,7 +25,7 @@ async function getSheetData(key) {
         .filter(row => row.get("Clave") === key)
         .map(row => row.toObject()); // Convertir cada fila en un objeto plano
 
-    console.log("Guest DATA:", guestData)
+    /* console.log("Guest DATA:", guestData) */
 
 
     if (guestData.length===0) {
@@ -35,7 +35,7 @@ async function getSheetData(key) {
 
     // Si el registro ya está confirmado, buscar en la hoja de "Confirmados"
     if (guestData[0]["Registro"] === "TRUE") {
-        console.log("✅ Invitado ya registrado, buscando en 'Confirmados'.");
+        /* console.log("✅ Invitado ya registrado, buscando en 'Confirmados'."); */
 
         const confirmedSheet = sheets.sheetsByTitle[CONFIRMED_SHEET];
         if (!confirmedSheet) throw new Error(`No se encontró la hoja llamada "${CONFIRMED_SHEET}"`);
@@ -55,7 +55,7 @@ async function getSheetData(key) {
 }
 
 export default async function handler(req, res) {
-    console.log("BODY:", req.body)
+    /* console.log("BODY:", req.body) */
     try {
         const { guestKey } = req.body; // Aseguramos que se extrae correctamente
 
@@ -64,7 +64,7 @@ export default async function handler(req, res) {
             return res.status(400).json({ success: false, message: "Código no proporcionado." });
         }
 
-        console.log("🔍 Código recibido en el backend:", guestKey); // Depuración
+        /* console.log("🔍 Código recibido en el backend:", guestKey); // Depuración */
 
         const data = await getSheetData(guestKey);
         if (data) {
