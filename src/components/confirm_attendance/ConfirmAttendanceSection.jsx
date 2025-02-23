@@ -39,6 +39,8 @@ const ConfirmAttendanceSection = ({ confirmRef, guestData, setGuestData, formDat
           <RSVPControls guestData={guestData} setGuestData={setGuestData} formData={formData} formRef={formRef} />
         </form>
       )}
+      <p className="mt-6">Si no puedes asistir, por favor háznoslo saber lo antes posible. Así podremos organizar mejor los espacios y permitir que otros seres queridos nos acompañen.</p>
+      <p>Gracias por ser parte de este día tan especial. ¡Nos emociona compartirlo contigo!</p>
     </section>
   );
 };

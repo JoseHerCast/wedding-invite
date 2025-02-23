@@ -42,7 +42,7 @@ const GuestVerificationForm = ({ setGuestData }) => {
   };
 
   return (
-    <div className="h-svh flex flex-col items-center justify-center bg-darkGreen-500 text-beige-500 p-8 shadow-lg w-full max-w-md">
+    <div className="h-svh flex flex-col items-center justify-center bg-darkGreen-500 text-beige-500 p-8 shadow-lg w-full">
       <h2 className="text-3xl font-greatVibes mb-4 text-center">
         Ingresa tu código personalizado
       </h2>
