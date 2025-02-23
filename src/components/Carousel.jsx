@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 const Carousel = ({ images }) => {
   const containerRef = useRef(null);
@@ -24,10 +25,11 @@ const Carousel = ({ images }) => {
               className="flex-shrink-0 min-w-[280px] sm:min-w-[320px] lg:min-w-[400px] cursor-pointer"
               onClick={() => setSelectedImage(src)}
             >
-              <img
+              <Image
                 src={src}
                 alt={`Boda ${index}`}
                 className="rounded-xl shadow-lg object-cover w-full h-64"
+                priority
               />
             </div>
           ))}

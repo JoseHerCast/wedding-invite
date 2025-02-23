@@ -52,4 +52,7 @@ export default {
     },
   },
   plugins: [require("tailwind-scrollbar-hide")],
+  experimental: {
+    optimizeCss: true,
+  },
 };

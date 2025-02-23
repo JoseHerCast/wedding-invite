@@ -6,6 +6,7 @@ import BottomSheet from "@/components/BottomSheet";
 import Carousel from "@/components/Carousel";
 import 'tailwindcss/tailwind.css';
 import { Great_Vibes, Playfair_Display } from 'next/font/google'
+import Image from "next/image";
 
 const greatVibes = Great_Vibes({
     weight: "400",
@@ -21,7 +22,6 @@ const playfairDisplay = Playfair_Display({
 
 
 export default function Home() {
-    const [unlockCode, setUnlockCode] = useState(false);
     const [showShadow, setShowShadow] = useState(false); // Estado para la sombra parpadeante
     const [isPlaying, setIsPlaying] = useState(true); // Estado para controlar la música
     const [guestData, setGuestData] = useState([]);
@@ -158,7 +158,7 @@ export default function Home() {
 
     return (
         <div className={`${playfairDisplay.variable} ${greatVibes.variable} font-playfairDisplay relative bg-cream-100 text-darkGreen-500 overflow-hidden`}>
-            <audio ref={audioRef} loop>
+            <audio ref={audioRef} loop preload="auto">
                 <source src="/assets/song.mp3" type="audio/mpeg" />
                 Tu navegador no soporta el elemento de audio.
             </audio>
@@ -171,10 +171,11 @@ export default function Home() {
                         : "shadow-none"
                         }`}
                 >
-                    <img
+                    <Image
                         className={`${isPlaying ? 'opacity-100' : 'opacity-40'} w-6`}
                         src="/assets/icons/musical_beige.png"
                         alt=""
+                        priority
                     />
                 </button>
             )}
@@ -213,17 +214,17 @@ export default function Home() {
                                     transition={{ repeat: Infinity, duration: 1.2, ease: "easeInOut" }}
                                     className="mt-1 text-2xl"
                                 >
-                                    <img className="w-6" src="/assets/icons/chevron_1_sage.png" alt="" />
+                                    <Image priority className="w-6" src="/assets/icons/chevron_1_sage.png" alt="" />
                                 </motion.div>
                             </button>
                         </div>
-                        <span className="inline-block w-full h-[150px] overflow-y-hidden mb-4 bg-[url('/assets/background_wood.png')]"><img className="" src="/assets/background_wood.png" alt="" /></span>
+                        <span className="inline-block w-full h-[150px] overflow-y-hidden mb-4 bg-[url('/assets/background_wood.png')]"><Image className="" src="/assets/background_wood.png" alt="" priority /></span>
                         {/* Contenido con un z-index mayor para que esté sobre la imagen */}
                         <div className="flex flex-col justify-center items-center">
                             <h1 className="w-full text-4xl mt-4 px-6 lg:text-xl text-beige-500 font-greatVibes">
                                 Nuestra Boda
                             </h1>
-                            <img className="w-1/2" src="/assets/icons/flourish_beige.png" alt="" />
+                            <Image priority className="w-1/2" src="/assets/icons/flourish_beige.png" alt="" />
                         </div>
                         <p className="w-full mt-4 px-6 text-sm lg:text-xl text-sage-500">
                             Con la bendición de nuestros padres:
@@ -278,7 +279,7 @@ export default function Home() {
                             rel="noopener noreferrer"
                             className="inline-block mt-2"
                         >
-                            <img src="/assets/icons/cathedral.png" alt="Icono de una catedral" />
+                            <Image priority src="/assets/icons/cathedral.png" alt="Icono de una catedral" />
                         </a>
 
                         <p className="w-full mt-6 text-2xl font-semibold lg:text-xl font-greatVibes text-oldGold-500">
@@ -290,7 +291,7 @@ export default function Home() {
                         <p className="w-full mt-6 text-base lg:text-xl font-semibold text-oldGold-500">
                             DESPUÉS DE LA CEREMONIA RELIGIOSA, AGRADECEMOS TU PRESENCIA EN:
                         </p>
-                        <span className="inline-block mt-6"><img src="/assets/icons/cheers.png" alt="Icono de una catedral" /></span>
+                        <span className="inline-block mt-6"><Image priority src="/assets/icons/cheers.png" alt="Icono de una catedral" /></span>
                         <p className="w-full mt-6 text-2xl lg:text-xl font-semibold text-oldGold-500 font-greatVibes">
                             Jardín Privado
                         </p>
@@ -300,14 +301,14 @@ export default function Home() {
                         <div className="grid grid-cols-2 gap-4">
                             <div onClick={() => setIsOpen(true)} className="flex flex-col">
                                 <div className="flex mt-8 btn justify-center">
-                                    <span className="w-10 content-center"><img src="/assets/icons/suit_golden.png" alt="Icono de un traje" /></span>
-                                    <span className="w-10 content-center"><img src="/assets/icons/dress.png" alt="Icono de un vestido" /></span>
+                                    <span className="w-10 content-center"><Image priority src="/assets/icons/suit_golden.png" alt="Icono de un traje" /></span>
+                                    <span className="w-10 content-center"><Image priority src="/assets/icons/dress.png" alt="Icono de un vestido" /></span>
                                 </div>
                                 <p className="text-center cursor-pointer px-2 py-2 rounded-lg shadow-md hover:shadow-lg active:shadow-none transition-all active:scale-95">Dress Code</p>
                             </div>
 
                             <div onClick={() => setIsOpenGifts(true)} className="flex flex-col items-center">
-                                <span className="w-16 content-center pt-9"><img src="/assets/icons/gifts.png" alt="" /></span>
+                                <span className="w-16 content-center pt-9"><Image priority src="/assets/icons/gifts.png" alt="" /></span>
                                 <p className="text-center cursor-pointer px-2 py-2 rounded-lg shadow-md hover:shadow-lg active:shadow-none transition-all active:scale-95">Mesa de regalos</p>
                             </div>
                         </div>
@@ -331,10 +332,10 @@ export default function Home() {
                         <div className="flex flex-col mb-4 items-center justify-center text-sage-500">
                             <div className="flex mb-2">
                                 <span className="w-14 content-center">
-                                    <img src="/assets/icons/suit_golden.png" alt="Icono de un traje" />
+                                    <Image priority src="/assets/icons/suit_golden.png" alt="Icono de un traje" />
                                 </span>
                                 <span className="w-14 content-center">
-                                    <img src="/assets/icons/dress.png" alt="Icono de un vestido" />
+                                    <Image priority src="/assets/icons/dress.png" alt="Icono de un vestido" />
                                 </span>
                             </div>
                             <p className="w-full px-2 text-2xl lg:text-xl font-greatVibes">
@@ -367,7 +368,7 @@ export default function Home() {
                     {/* Regalos */}
                     <BottomSheet isOpen={isOpenGifts} onClose={() => setIsOpenGifts(false)}>
                         <div className="flex flex-col items-center justify-center">
-                            <span className="w-16 content-center mb-2"><img src="/assets/icons/gifts.png" alt="" /></span>
+                            <span className="w-16 content-center mb-2"><Image priority src="/assets/icons/gifts.png" alt="" /></span>
 
                             <p className="w-full mt-2 px-3 text-2xl lg:text-xl text-sage-500 font-greatVibes">
                                 Tu presencia es el mejor regalo:
@@ -375,7 +376,7 @@ export default function Home() {
                             <p className="w-full px-6 text-sm lg:text-xl text-sage-500">
                                 Si deseas acompañarnos con un detalle, te dejamos dos opciones pensadas con cariño para nuestra nueva etapa.
                             </p>
-                            <img className="w-10 mt-6" src="/assets/icons/envelope.png" alt="" />
+                            <Image priority className="w-10 mt-6" src="/assets/icons/envelope.png" alt="" />
                             <p className="w-full mt-1 px-6 text-sm lg:text-xl font-semibold text-sage-500">
                                 Dinero en Sobre Cerrado
                             </p>
@@ -383,7 +384,7 @@ export default function Home() {
                                 Una tradición que simboliza prosperidad y buenos deseos. Puedes entregarlo en un sobre cerrado.
                             </p>
                             <a className="w-10 mt-8" href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/51451740" target="_blank">
-                                <img className="w-full" src="/assets/icons/Liverpool.png" alt="" />
+                                <Image priority className="w-full" src="/assets/icons/Liverpool.png" alt="" />
                             </a>
                             <p className="w-full text-sm lg:text-xl font-semibold text-oldGold-500">
                                 51451740
