@@ -184,7 +184,7 @@ export default function Home() {
 
             {!isUnlocked ? (
                 <div className="h-svh flex items-center justify-center">
-                    <div className="h-screen flex items-center justify-center">
+                    <div className="h-screen flex-grow flex items-center justify-center">
                         <GuestVerificationForm setGuestData={setGuestData} />
                     </div>
                 </div>
@@ -192,7 +192,7 @@ export default function Home() {
                 <>
                     {/* Página 1 */}
                     <section className="relative z-0 h-[76vh] lg:h-screen flex flex-col items-center justify-center px-6 text-center 
-    bg-[url('/assets/boda_alt.jpeg')] bg-[right_72%_top_5%] bg-[220%_auto] sm:bg-[160%_auto] md:bg-[130%_auto] lg:bg-[100%_auto]">
+    bg-[url('/assets/boda_alt.jpeg')] bg-[right_72%_top_5%] lg:bg-[right_72%_top_35%] bg-[220%_auto] sm:bg-[160%_auto] md:bg-[130%_auto] lg:bg-[100%_auto]">
                         <p className="w-full absolute px-6 top-8 italic text-xs lg:text-xl text-beige-500">
                             <q>El amor es paciente, es bondadoso... Todo lo soporta, Todo lo espera. ( <cite>I Corintios 13:4-7</cite> )</q>
                         </p>
@@ -202,8 +202,8 @@ export default function Home() {
 
                     {/* Página 2 */}
                     <section className="relative z-0 flex-col text-center pb-10 bg-darkGreen-500 -mt-14 lg:-mt-32">
-                        <div className="absolute w-full h-32 lg:top-[18%] flex flex-col items-center justify-cente mt-10">
-                            <h1 className="font-greatVibes text-beige-500 text-5xl
+                        <div className="absolute w-full lg:top-[-10px] h-32 flex flex-col items-center justify-center mt-10">
+                            <h1 className="font-greatVibes text-beige-500 text-5xl lg:text-6xl
                     drop-shadow-[2px_2px_3px_#846008FF] 
                     ">José y Carla</h1>
                             <p className="text-beige-500 text-base mt-1 drop-shadow-[2px_2px_3px_#846008FF] ">17 de Mayo 2025</p>
@@ -239,12 +239,12 @@ export default function Home() {
                         </span>
                         {/* Contenido con un z-index mayor para que esté sobre la imagen */}
                         <div className="flex flex-col justify-center items-center">
-                            <h1 className="w-full text-4xl mt-4 px-6 lg:text-xl text-beige-500 font-greatVibes">
+                            <h1 className="w-full text-4xl mt-4 px-6 lg:text-5xl text-beige-500 font-greatVibes">
                                 Nuestra Boda
                             </h1>
                             <Image
                                 priority
-                                className="w-1/2"
+                                className="w-1/2 lg:w-1/3"
                                 width={680}
                                 height={24}
                                 src="/assets/icons/flourish_beige.png"
@@ -254,7 +254,7 @@ export default function Home() {
                         <p className="w-full mt-4 px-6 text-sm lg:text-xl text-sage-500">
                             Con la bendición de nuestros padres:
                         </p>
-                        <div className="flex px-6 pt-3 justify-between text-sm italic">
+                        <div className="flex px-6 pt-3 justify-between md:justify-evenly text-sm italic">
                             <div>
                                 <p className="w-full lg:text-xl font-semibold text-beige-500">
                                     Elvira Flores Ramírez

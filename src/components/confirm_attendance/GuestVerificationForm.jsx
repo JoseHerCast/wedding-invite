@@ -49,16 +49,16 @@ const GuestVerificationForm = ({ setGuestData }) => {
       <p className="text-sm lg:text-base text-center mb-6">
         Introduce el código de invitación para acceder a los detalles de la boda.
       </p>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
+      <form onSubmit={handleSubmit} className="flex flex-col items-center gap-4 w-full">
         <input
           type="text"
           placeholder="Código personalizado..."
           value={guestKey}
           onChange={(e) => setGuestKey(e.target.value)}
-          className="border border-beige-500 p-2 rounded bg-transparent text-center text-beige-500 focus:outline-none focus:ring-2 focus:ring-oldGold-500 placeholder-beige-500"
+          className="border border-beige-500 p-2 rounded bg-transparent text-center text-beige-500 focus:outline-none focus:ring-2 focus:ring-oldGold-500 placeholder-beige-500 max-w-md w-full"
           required
         />
-        <button type="submit" className={`${isLoading ? 'bg-gray-400' : 'bg-oldGold-500'}  text-white py-2 rounded-lg shadow-md hover:shadow-lg transition-all active:scale-95`} disabled={isLoading} >
+        <button type="submit" className={`${isLoading ? 'bg-gray-400' : 'bg-oldGold-500'}  text-white py-2 rounded-lg shadow-md hover:shadow-lg transition-all active:scale-95 max-w-md w-full`} disabled={isLoading} >
           {isLoading ? "Verificando..." : "Acceder"}
         </button>
       </form>
