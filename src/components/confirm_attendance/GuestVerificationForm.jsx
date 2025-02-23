@@ -3,9 +3,12 @@ import { setCookie } from "@/utils/cookieHandler";
 
 const GuestVerificationForm = ({ setGuestData }) => {
   const [guestKey, setGuestKey] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // Estado para el loader
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true); // Activar loader
     setCookie("guestKey", guestKey);
 
     try {
@@ -28,6 +31,9 @@ const GuestVerificationForm = ({ setGuestData }) => {
       alert("Hubo un error. Intenta de nuevo.");
       setGuestData([]);
     }
+    finally{
+      setIsLoading(false)
+    }
   };
 
   return (
@@ -47,8 +53,8 @@ const GuestVerificationForm = ({ setGuestData }) => {
           className="border border-beige-500 p-2 rounded bg-transparent text-center text-beige-500 focus:outline-none focus:ring-2 focus:ring-oldGold-500 placeholder-beige-500"
           required
         />
-        <button type="submit" className="bg-oldGold-500 text-white py-2 rounded-lg shadow-md hover:shadow-lg transition-all active:scale-95">
-          Acceder
+        <button type="submit" className={`${isLoading?'bg-gray-400':'bg-oldGold-500'}  text-white py-2 rounded-lg shadow-md hover:shadow-lg transition-all active:scale-95`} disabled={isLoading} >
+          {isLoading?"Verificando...":"Acceder"}
         </button>
       </form>
     </div>

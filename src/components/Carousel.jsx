@@ -29,6 +29,8 @@ const Carousel = ({ images }) => {
                 src={src}
                 alt={`Boda ${index}`}
                 className="rounded-xl shadow-lg object-cover w-full h-64"
+                width={2719}
+                height={2719}
                 priority
               />
             </div>

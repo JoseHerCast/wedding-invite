@@ -40,7 +40,7 @@ export default function Home() {
         "/assets/gallery/carrusel6.jpg",
         "/assets/gallery/carrusel7.jpg",
         "/assets/gallery/carrusel8.jpg",
-      ];
+    ];
 
     // Si ya hay datos del invitado, la página se desbloquea
     const isUnlocked = guestData.length > 0;
@@ -175,6 +175,8 @@ export default function Home() {
                         className={`${isPlaying ? 'opacity-100' : 'opacity-40'} w-6`}
                         src="/assets/icons/musical_beige.png"
                         alt=""
+                        width={24}
+                        height={24}
                         priority
                     />
                 </button>
@@ -214,17 +216,40 @@ export default function Home() {
                                     transition={{ repeat: Infinity, duration: 1.2, ease: "easeInOut" }}
                                     className="mt-1 text-2xl"
                                 >
-                                    <Image priority className="w-6" src="/assets/icons/chevron_1_sage.png" alt="" />
+                                    <Image
+                                        priority
+                                        className="w-6"
+                                        width={24}
+                                        height={24}
+                                        src="/assets/icons/chevron_1_sage.png"
+                                        alt=""
+                                    />
                                 </motion.div>
                             </button>
                         </div>
-                        <span className="inline-block w-full h-[150px] overflow-y-hidden mb-4 bg-[url('/assets/background_wood.png')]"><Image className="" src="/assets/background_wood.png" alt="" priority /></span>
+                        <span className="inline-block w-full h-[150px] overflow-y-hidden mb-4 bg-[url('/assets/background_wood.png')]">
+                            <Image
+                                className=""
+                                src="/assets/background_wood.png"
+                                alt=""
+                                width={360}
+                                height={270}
+                                priority
+                            />
+                        </span>
                         {/* Contenido con un z-index mayor para que esté sobre la imagen */}
                         <div className="flex flex-col justify-center items-center">
                             <h1 className="w-full text-4xl mt-4 px-6 lg:text-xl text-beige-500 font-greatVibes">
                                 Nuestra Boda
                             </h1>
-                            <Image priority className="w-1/2" src="/assets/icons/flourish_beige.png" alt="" />
+                            <Image
+                                priority
+                                className="w-1/2"
+                                width={680}
+                                height={24}
+                                src="/assets/icons/flourish_beige.png"
+                                alt=""
+                            />
                         </div>
                         <p className="w-full mt-4 px-6 text-sm lg:text-xl text-sage-500">
                             Con la bendición de nuestros padres:
@@ -279,7 +304,13 @@ export default function Home() {
                             rel="noopener noreferrer"
                             className="inline-block mt-2"
                         >
-                            <Image priority src="/assets/icons/cathedral.png" alt="Icono de una catedral" />
+                            <Image
+                                priority
+                                height={64}
+                                width={64}
+                                src="/assets/icons/cathedral.png"
+                                alt="Icono de una catedral"
+                            />
                         </a>
 
                         <p className="w-full mt-6 text-2xl font-semibold lg:text-xl font-greatVibes text-oldGold-500">
@@ -291,7 +322,14 @@ export default function Home() {
                         <p className="w-full mt-6 text-base lg:text-xl font-semibold text-oldGold-500">
                             DESPUÉS DE LA CEREMONIA RELIGIOSA, AGRADECEMOS TU PRESENCIA EN:
                         </p>
-                        <span className="inline-block mt-6"><Image priority src="/assets/icons/cheers.png" alt="Icono de una catedral" /></span>
+                        <span className="inline-block mt-6">
+                            <Image
+                                priority
+                                src="/assets/icons/cheers.png" alt="Icono de copas"
+                                width={64}
+                                height={64}
+                            />
+                        </span>
                         <p className="w-full mt-6 text-2xl lg:text-xl font-semibold text-oldGold-500 font-greatVibes">
                             Jardín Privado
                         </p>
@@ -301,14 +339,38 @@ export default function Home() {
                         <div className="grid grid-cols-2 gap-4">
                             <div onClick={() => setIsOpen(true)} className="flex flex-col">
                                 <div className="flex mt-8 btn justify-center">
-                                    <span className="w-10 content-center"><Image priority src="/assets/icons/suit_golden.png" alt="Icono de un traje" /></span>
-                                    <span className="w-10 content-center"><Image priority src="/assets/icons/dress.png" alt="Icono de un vestido" /></span>
+                                    <span className="w-10 content-center">
+                                        <Image
+                                            priority
+                                            src="/assets/icons/suit_golden.png"
+                                            alt="Icono de un traje"
+                                            height={64}
+                                            width={64}
+                                        />
+                                    </span>
+                                    <span className="w-10 content-center">
+                                        <Image
+                                            height={64}
+                                            width={64}
+                                            priority
+                                            src="/assets/icons/dress.png"
+                                            alt="Icono de un vestido"
+                                        />
+                                    </span>
                                 </div>
                                 <p className="text-center cursor-pointer px-2 py-2 rounded-lg shadow-md hover:shadow-lg active:shadow-none transition-all active:scale-95">Dress Code</p>
                             </div>
 
                             <div onClick={() => setIsOpenGifts(true)} className="flex flex-col items-center">
-                                <span className="w-16 content-center pt-9"><Image priority src="/assets/icons/gifts.png" alt="" /></span>
+                                <span className="w-16 content-center pt-9">
+                                    <Image
+                                        priority
+                                        src="/assets/icons/gifts.png"
+                                        alt=""
+                                        width={64}
+                                        height={64}
+                                    />
+                                </span>
                                 <p className="text-center cursor-pointer px-2 py-2 rounded-lg shadow-md hover:shadow-lg active:shadow-none transition-all active:scale-95">Mesa de regalos</p>
                             </div>
                         </div>
@@ -323,7 +385,7 @@ export default function Home() {
                         handleInputChange={handleInputChange}
                     />
 
-                    <Carousel images={images}/>
+                    <Carousel images={images} />
 
 
 
@@ -332,10 +394,22 @@ export default function Home() {
                         <div className="flex flex-col mb-4 items-center justify-center text-sage-500">
                             <div className="flex mb-2">
                                 <span className="w-14 content-center">
-                                    <Image priority src="/assets/icons/suit_golden.png" alt="Icono de un traje" />
+                                    <Image
+                                        priority
+                                        src="/assets/icons/suit_golden.png"
+                                        alt="Icono de un traje"
+                                        width={64}
+                                        height={64}
+                                    />
                                 </span>
                                 <span className="w-14 content-center">
-                                    <Image priority src="/assets/icons/dress.png" alt="Icono de un vestido" />
+                                    <Image
+                                        priority
+                                        width={64}
+                                        height={64}
+                                        src="/assets/icons/dress.png"
+                                        alt="Icono de un vestido"
+                                    />
                                 </span>
                             </div>
                             <p className="w-full px-2 text-2xl lg:text-xl font-greatVibes">
@@ -368,7 +442,15 @@ export default function Home() {
                     {/* Regalos */}
                     <BottomSheet isOpen={isOpenGifts} onClose={() => setIsOpenGifts(false)}>
                         <div className="flex flex-col items-center justify-center">
-                            <span className="w-16 content-center mb-2"><Image priority src="/assets/icons/gifts.png" alt="" /></span>
+                            <span className="w-16 content-center mb-2">
+                                <Image
+                                    priority
+                                    src="/assets/icons/gifts.png"
+                                    alt=""
+                                    height={64}
+                                    width={64}
+                                />
+                            </span>
 
                             <p className="w-full mt-2 px-3 text-2xl lg:text-xl text-sage-500 font-greatVibes">
                                 Tu presencia es el mejor regalo:
@@ -376,7 +458,14 @@ export default function Home() {
                             <p className="w-full px-6 text-sm lg:text-xl text-sage-500">
                                 Si deseas acompañarnos con un detalle, te dejamos dos opciones pensadas con cariño para nuestra nueva etapa.
                             </p>
-                            <Image priority className="w-10 mt-6" src="/assets/icons/envelope.png" alt="" />
+                            <Image
+                                priority
+                                className="w-10 mt-6"
+                                src="/assets/icons/envelope.png"
+                                alt=""
+                                width={64}
+                                height={64}
+                            />
                             <p className="w-full mt-1 px-6 text-sm lg:text-xl font-semibold text-sage-500">
                                 Dinero en Sobre Cerrado
                             </p>
@@ -384,7 +473,14 @@ export default function Home() {
                                 Una tradición que simboliza prosperidad y buenos deseos. Puedes entregarlo en un sobre cerrado.
                             </p>
                             <a className="w-10 mt-8" href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/51451740" target="_blank">
-                                <Image priority className="w-full" src="/assets/icons/Liverpool.png" alt="" />
+                                <Image
+                                    priority
+                                    className="w-full"
+                                    src="/assets/icons/Liverpool.png"
+                                    alt=""
+                                    width={64}
+                                    height={64}
+                                />
                             </a>
                             <p className="w-full text-sm lg:text-xl font-semibold text-oldGold-500">
                                 51451740
