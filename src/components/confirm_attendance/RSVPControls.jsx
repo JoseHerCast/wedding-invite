@@ -1,6 +1,7 @@
 import { useState } from "react";
 import RSVPConfirmation from "@/components/confirm_attendance/RSVPConfirmation";
 import { getCookie } from "@/utils/cookieHandler";
+import MyAlert from "@/components/MyAlert";
 
 const RSVPControls = ({ guestData, formData, formRef, setGuestData }) => {
     const [isLoading, setIsLoading] = useState(false); // Estado para el loader

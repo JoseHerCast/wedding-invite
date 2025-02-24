@@ -7,6 +7,7 @@ import Carousel from "@/components/Carousel";
 import 'tailwindcss/tailwind.css';
 import { Great_Vibes, Playfair_Display } from 'next/font/google'
 import Image from "next/image";
+import ShakingButton from "@/components/ShakingButton";
 
 const greatVibes = Great_Vibes({
     weight: "400",
@@ -298,20 +299,22 @@ export default function Home() {
                                 <p className="text-2xl font-greatVibes">14:00 hrs</p>
                             </div>
                         </div>
-                        <a
-                            href="https://maps.app.goo.gl/AA35o1x4hL8hvTaa9"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-block mt-2"
-                        >
-                            <Image
-                                priority
-                                height={64}
-                                width={64}
-                                src="/assets/icons/cathedral.png"
-                                alt="Icono de una catedral"
-                            />
-                        </a>
+                        <ShakingButton shakeInterval={3000}>
+                            <a
+                                href="https://maps.app.goo.gl/AA35o1x4hL8hvTaa9"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-block mt-2"
+                            >
+                                <Image
+                                    priority
+                                    height={64}
+                                    width={64}
+                                    src="/assets/icons/cathedral.png"
+                                    alt="Icono de una catedral"
+                                />
+                            </a>
+                        </ShakingButton>
 
                         <p className="w-full mt-6 text-2xl font-semibold lg:text-xl font-greatVibes text-oldGold-500">
                             Parroquia de Santa María Magdalena
@@ -337,7 +340,10 @@ export default function Home() {
                             Santa Catarina, Acolman, 55875
                         </p>
                         <div className="grid grid-cols-2 gap-4">
-                            <div onClick={() => setIsOpen(true)} className="flex flex-col">
+                            <ShakingButton
+                                onClick={() => setIsOpen(true)}
+                                className="flex flex-col"
+                            >
                                 <div className="flex mt-8 btn justify-center">
                                     <span className="w-10 content-center">
                                         <Image
@@ -358,21 +364,31 @@ export default function Home() {
                                         />
                                     </span>
                                 </div>
-                                <p className="text-center cursor-pointer px-2 py-2 rounded-lg shadow-md hover:shadow-lg active:shadow-none transition-all active:scale-95">Dress Code</p>
-                            </div>
+                                <p className="text-center cursor-pointer px-2 py-2 rounded-lg shadow-md hover:shadow-lg active:shadow-none transition-all active:scale-95">
+                                    Dress Code
+                                </p>
+                            </ShakingButton>
 
-                            <div onClick={() => setIsOpenGifts(true)} className="flex flex-col items-center">
+
+                            <ShakingButton
+                                onClick={() => setIsOpenGifts(true)}
+                                className="flex flex-col items-center cursor-pointer"
+                            >
                                 <span className="w-16 content-center pt-9">
                                     <Image
                                         priority
                                         src="/assets/icons/gifts.png"
-                                        alt=""
+                                        alt="Regalo"
                                         width={64}
                                         height={64}
                                     />
                                 </span>
-                                <p className="text-center cursor-pointer px-2 py-2 rounded-lg shadow-md hover:shadow-lg active:shadow-none transition-all active:scale-95">Mesa de regalos</p>
-                            </div>
+                                <p className="text-center px-2 py-2 rounded-lg shadow-md hover:shadow-lg active:shadow-none transition-all active:scale-95">
+                                    Mesa de regalos
+                                </p>
+                            </ShakingButton>
+
+
                         </div>
                     </section>
 
