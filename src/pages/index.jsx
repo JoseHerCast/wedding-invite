@@ -343,6 +343,7 @@ export default function Home() {
                             <ShakingButton
                                 onClick={() => setIsOpen(true)}
                                 className="flex flex-col"
+                                shakeInterval={5000}
                             >
                                 <div className="flex mt-8 btn justify-center">
                                     <span className="w-10 content-center">
@@ -373,6 +374,7 @@ export default function Home() {
                             <ShakingButton
                                 onClick={() => setIsOpenGifts(true)}
                                 className="flex flex-col items-center cursor-pointer"
+                                shakeInterval={3000}
                             >
                                 <span className="w-16 content-center pt-9">
                                     <Image
