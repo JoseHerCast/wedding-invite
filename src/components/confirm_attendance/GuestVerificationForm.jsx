@@ -24,6 +24,7 @@ const GuestVerificationForm = ({ setGuestData }) => {
       const result = await res.json();
 
       if (res.ok && result.success) {
+        console.log("GuestVerificationForm",result)
         setGuestData(result.data || []);
       } else {
         setAlertMessage("Código inválido o no encontrado.");

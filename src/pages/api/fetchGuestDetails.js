@@ -46,12 +46,16 @@ async function getSheetData(key) {
         const confirmedGuests = confirmedRows
             .filter(row => (row.get("Clave") === key) && (row.get("Asistencia")==="Asistirá"))
             .map(row => row.toObject());
+        
+        const noAttendance = confirmedRows
+            .filter(row => (row.get("Clave") === key) && (row.get("Asistencia")==="No Asistirá"))
+            .map(row => row.toObject());
 
-        return confirmedGuests.length > 0 ? confirmedGuests : null;
+        return confirmedGuests.length > 0 ? {guestsArray:confirmedGuests, attending:true} : noAttendance.length >0?{guestsArray:noAttendance, attending:false} :null;
     }
 
     // Si el invitado no está registrado aún, devolver su información desde "Invitados"
-    return guestData.length > 0 ? guestData : null;
+    return guestData.length > 0 ? {guestsArray:guestData, attending:false} : null;
 }
 
 export default async function handler(req, res) {
@@ -67,8 +71,9 @@ export default async function handler(req, res) {
         /* console.log("🔍 Código recibido en el backend:", guestKey); // Depuración */
 
         const data = await getSheetData(guestKey);
+        console.log("fetchGuestDetails:", data)
         if (data) {
-            res.status(200).json({ success: true, data });
+            res.status(200).json({ success: true, data:data.guestsArray });
         } else {
             res.status(404).json({ success: false, message: "Número no encontrado." });
         }

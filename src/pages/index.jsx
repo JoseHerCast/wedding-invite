@@ -107,7 +107,6 @@ export default function Home() {
     };
 
 
-
     useEffect(() => {
         if (guestData.length === 0) return;
 
@@ -299,7 +298,7 @@ export default function Home() {
                                 <p className="text-2xl font-greatVibes">14:00 hrs</p>
                             </div>
                         </div>
-                        <ShakingButton shakeInterval={3000}>
+                        <ShakingButton shakeInterval={4000}>
                             <a
                                 href="https://maps.app.goo.gl/AA35o1x4hL8hvTaa9"
                                 target="_blank"
