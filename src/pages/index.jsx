@@ -332,8 +332,15 @@ export default function Home() {
                                 height={64}
                             />
                         </span>
-                        <p className="w-full mt-6 text-2xl lg:text-xl font-semibold text-oldGold-500 font-greatVibes">
-                            Jardín Privado
+                        <p className="w-full mt-6 text-2xl lg:text-xl font-semibold text-oldGold-500">
+                            <a
+                                href="https://maps.app.goo.gl/5r7y3jJJNKKf7GGb8"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-block mt-2"
+                            >
+                                Av. Río chico #26
+                            </a>
                         </p>
                         <p className="w-full mt-2 text-xs lg:text-xl font-semibold text-oldGold-500">
                             Santa Catarina, Acolman, 55875
